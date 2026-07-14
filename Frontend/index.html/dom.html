@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+    </head>
+   <body>
+<h1 id="h1_id">Working with the DOM</h1>
+<input type="text" id="t1"/>
+<button id="b1" onclick="click_btn()">Click Me</button>
+<script>
+    function click_btn() {
+        var val = document.getElementById("t1").value;
+        alert("Button Clicked: " + val);
+    }
+</script>
+   </body>
+</html>

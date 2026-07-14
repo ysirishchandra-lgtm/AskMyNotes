@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AskMyNotes</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid #e5e7eb;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: spin 20s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+</style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+<div class="bg-white max-w-md w-full rounded-2xl shadow-lg p-6 space-y-4">
+<header class="text-center">
+<h1 class="text-3xl font-bold text-gray-800">AskMyNotes</h1>
+<p class="text-sm text-gray-500">Ask questions about your notes</p>
+</header>
+<input type="text" id="question"
+class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focu
+s:ring-blue-400"
+placeholder="Type your question..." />
+<input type="file" id="notes" accept=".txt,.pdf"
+class="w-full text-sm text-gray-600" />
+<button id="submit"
+class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg">
+Ask
+</button>
+<div id="output"
+class="border border-gray-200 rounded-lg p-4 text-gray-700 bg-gray-50 min-h-[100px] flex items-center justify-center">
+<div class="text-sm text-gray-500">Answer will appear here...</div>
+</div>
+
+<script>
+  const questionInput = document.getElementById('question');
+  const submitButton = document.getElementById('submit');
+  const output = document.getElementById('output');
+
+  submitButton.addEventListener('click', () => {
+    const question = questionInput.value.trim();
+
+    if (!question) {
+      output.innerHTML = '<div class="text-sm text-red-500">Please enter a question first.</div>';
+      return;
+    }
+
+    output.innerHTML = `
+      <div class="flex items-center gap-3 text-blue-600">
+        <div class="spinner"></div>
+        <span class="font-medium">Generating answer...</span>
+      </div>
+    `;
+
+    setTimeout(() => {
+      output.innerHTML = `
+        <div class="space-y-2 text-sm text-gray-700">
+          <p class="font-semibold text-gray-800">Answer received</p>
+          <p><strong>Question:</strong> ${question}</p>
+        </div>
+      `;
+    }, 1200);
+  });
+</script>

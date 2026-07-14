@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Selection Methods</title>
+    <style>
+        body{font-family:Arial;padding:20px;}
+        .student{border:1px solid black;padding:10px;margin:5px;}
+        .important{color:red;}
+        button{margin:5px;padding:8px;}
+    </style>
+</head>
+
+<body>
+
+<h1 id="heading">DOM Selection Methods Demonstration</h1>
+
+<h2>Students</h2>
+
+<div class="student">
+    <p>Kaustub</p>
+</div>
+
+<div class="student">
+    <p>Rahul</p>
+</div>
+
+<div class="student">
+    <p>Riya</p>
+</div>
+
+<h2>Courses</h2>
+
+<ul>
+    <li class="important">HTML</li>
+    <li>CSS</li>
+    <li class="important">JavaScript</li>
+    <li>Python</li>
+</ul>
+
+<button onclick="demoGetElementById()">getElementById()</button>
+<button onclick="demoGetElementsByClassName()">getElementsByClassName()</button>
+<button onclick="demoGetElementsByTagName()">getElementsByTagName()</button>
+<button onclick="demoQuerySelector()">querySelector()</button>
+<button onclick="demoQuerySelectorAll()">querySelectorAll()</button>
+<button onclick="resetPage()">Reset</button>
+
+<hr>
+
+<div id="output">
+Click any button to see the result here.
+</div>
+
+<script>
+
+function showOutput(message){
+    document.getElementById("output").innerHTML = message;
+}
+
+function demoGetElementById(){
+    document.getElementById("heading").innerHTML="Heading Updated";
+    showOutput("getElementById() executed");
+}
+
+function demoGetElementsByClassName(){
+    let s=document.getElementsByClassName("student");
+    for(let i=0;i<s.length;i++)
+        s[i].style.background="yellow";
+    showOutput("getElementsByClassName() executed");
+}
+
+function demoGetElementsByTagName(){
+    let p=document.getElementsByTagName("p");
+    for(let i=0;i<p.length;i++)
+        p[i].style.color="blue";
+    showOutput("getElementsByTagName() executed");
+}
+
+function demoQuerySelector(){
+    document.querySelector(".important").style.color="green";
+    showOutput("querySelector() executed");
+}
+
+function demoQuerySelectorAll(){
+    let c=document.querySelectorAll(".important");
+    c.forEach(x=>x.style.background="pink");
+    showOutput("querySelectorAll() executed");
+}
+
+function resetPage(){
+    location.reload();
+}
+
+</script>
+
+</body>
+</html>

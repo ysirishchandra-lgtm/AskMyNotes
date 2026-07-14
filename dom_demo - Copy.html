@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Methods Demonstration</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #2c3e50;
+    }
+
+    .section-title {
+      background-color: #e8f0fe;
+      padding: 10px;
+      border-left: 5px solid #3498db;
+      margin-top: 25px;
+    }
+
+    #main-heading {
+      color: #2980b9;
+      padding: 10px;
+      border: 2px dashed #2980b9;
+      text-align: center;
+    }
+
+    .student-card {
+      background-color: #ecf0f1;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border-left: 5px solid #95a5a6;
+    }
+
+    .highlight {
+      background-color: #fff3cd;
+      border-left: 5px solid #f39c12;
+    }
+
+    .course {
+      padding: 8px;
+      margin: 6px 0;
+      background-color: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .important {
+      color: #c0392b;
+      font-weight: bold;
+    }
+
+    button {
+      margin: 8px 5px;
+      padding: 10px 14px;
+      border: none;
+      background-color: #3498db;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #217dbb;
+    }
+
+    .reset-btn {
+      background-color: #e74c3c;
+    }
+
+    .reset-btn:hover {
+      background-color: #c0392b;
+    }
+
+    #output {
+      background-color: #1e1e1e;
+      color: #00ff90;
+      padding: 15px;
+      min-height: 80px;
+      border-radius: 8px;
+      margin-top: 20px;
+      white-space: pre-line;
+      font-family: Consolas, monospace;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>JavaScript DOM Selection Methods</h1>
+    <p>Single Page Demonstration</p>
+  </header>
+
+  <div class="container">
+
+    <h2 id="main-heading">Online Course Registration Page</h2>
+
+    <p>
+      This page contains student cards, course names, paragraphs, and buttons.
+      Each button demonstrates one DOM selection method.
+    </p>
+
+    <div class="section-title">
+      <h3>Student Details</h3>
+    </div>
+
+    <div class="student-card">
+      <h3>Student 1</h3>
+      <p>Name: Ravi</p>
+      <p>Course: JavaScript</p>
+    </div>
+
+    <div class="student-card">
+      <h3>Student 2</h3>
+      <p>Name: Priya</p>
+      <p>Course: Python</p>
+    </div>
+
+    <div class="student-card">
+      <h3>Student 3</h3>
+      <p>Name: Aman</p>
+      <p>Course: Java</p>
+    </div>
+
+    <div class="section-title">
+      <h3>Available Courses</h3>
+    </div>
+
+    <div class="course">HTML</div>
+    <div class="course important">CSS</div>
+    <div class="course">JavaScript</div>
+    <div class="course important">React</div>
+
+    <div class="section-title">
+      <h3>DOM Method Buttons</h3>
+    </div>
+
+    <button onclick="demoGetElementById()">getElementById()</button>
+    <button onclick="demoGetElementsByClassName()">getElementsByClassName()</button>
+    <button onclick="demoGetElementsByTagName()">getElementsByTagName()</button>
+    <button onclick="demoQuerySelector()">querySelector()</button>
+    <button onclick="demoQuerySelectorAll()">querySelectorAll()</button>
+    <button class="reset-btn" onclick="resetPage()">Reset</button>
+
+    <h3>Output:</h3>
+    <div id="output">Click any button to see the result here.</div>
+
+  </div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // 1. getElementById — changes #main-heading text content
+    function demoGetElementById() {
+      const heading = document.getElementById("main-heading");
+      heading.textContent = "Selected using getElementById()";
+      heading.style.backgroundColor = "#d5f5e3";
+      output.textContent = "getElementById() used to update the heading text.";
+    }
+
+    // 2. getElementsByClassName — selects all student cards by class name
+    function demoGetElementsByClassName() {
+      const cards = document.getElementsByClassName("student-card");
+      for (let card of cards) {
+        card.classList.add("highlight");
+      }
+      output.textContent = "Number of student cards selected: " + cards.length;
+    }
+
+    // 3. getElementsByTagName — selects all <p> elements on the page
+    function demoGetElementsByTagName() {
+      const paras = document.getElementsByTagName("p");
+      for (let p of paras) {
+        p.style.color = "#8e44ad";
+      }
+      output.textContent = "Tag selected: p";
+    }
+
+    // 4. querySelector — selects the FIRST .important course element
+    function demoQuerySelector() {
+      const firstImportant = document.querySelector(".course.important");
+      firstImportant.style.border = "2px solid #e74c3c";
+      firstImportant.style.backgroundColor = "#fdecea";
+      output.textContent = "Only the first important course is selected.";
+    }
+
+    // 5. querySelectorAll — selects ALL .important course elements
+    function demoQuerySelectorAll() {
+      const importantCourses = document.querySelectorAll(".course.important");
+      importantCourses.forEach(el => {
+        el.style.outline = "3px solid #8e44ad";
+        el.style.backgroundColor = "#f5eef8";
+      });
+      output.textContent =
+        "Number of important courses selected: " + importantCourses.length;
+    }
+
+    // Reset — restores the page to its original visual state
+    function resetPage() {
+      // Reset heading text and style
+      const heading = document.getElementById("main-heading");
+      heading.textContent = "Online Course Registration Page";
+      heading.style.backgroundColor = "";
+
+      // Reset student cards
+      const cards = document.getElementsByClassName("student-card");
+      for (let card of cards) card.classList.remove("highlight");
+
+      // Reset <p> colors
+      const paras = document.getElementsByTagName("p");
+      for (let p of paras) p.style.color = "";
+
+      // Reset first important course border
+      const firstImportant = document.querySelector(".course.important");
+      firstImportant.style.border = "";
+      firstImportant.style.backgroundColor = "";
+
+      // Reset all important courses
+      const importantCourses = document.querySelectorAll(".course.important");
+      importantCourses.forEach(el => {
+        el.style.outline = "";
+        el.style.backgroundColor = "";
+      });
+
+      output.textContent = "Click any button to see the result here.";
+    }
+  </script>
+
+</body>
+</html>

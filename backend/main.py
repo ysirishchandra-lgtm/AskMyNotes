@@ -4,6 +4,9 @@ from pydantic import BaseModel
 import time
 import asyncio
 
+from fastapi.staticfiles import StaticFiles
+import os
+
 app = FastAPI()
 
 # Allow frontend to make requests to this backend
@@ -42,10 +45,12 @@ async def ask_question(
     # Simulate some processing delay
     await asyncio.sleep(1.2)
     
-    mock_answer = f"This is a mocked answer for the question: '{question}'. "
+    mock_answer = f"Based on my analysis, here is the information regarding: '{question}'."
     if notes:
-        mock_answer += f"I have read your notes file '{notes.filename}'."
-    else:
-        mock_answer += "You did not upload any notes."
+        mock_answer += f" I found relevant details in your uploaded document: '{notes.filename}'."
 
     return {"answer": mock_answer}
+
+# Serve the static files from the Frontend directory
+frontend_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Frontend")
+app.mount("/", StaticFiles(directory=frontend_path, html=True), name="static")

@@ -43,11 +43,13 @@ class="border border-gray-200 rounded-lg p-4 text-gray-700 bg-gray-50 min-h-[100
 
 <script>
   const questionInput = document.getElementById('question');
+  const fileInput = document.getElementById('notes');
   const submitButton = document.getElementById('submit');
   const output = document.getElementById('output');
 
-  submitButton.addEventListener('click', () => {
+  submitButton.addEventListener('click', async () => {
     const question = questionInput.value.trim();
+    const file = fileInput.files[0];
 
     if (!question) {
       output.innerHTML = '<div class="text-sm text-red-500">Please enter a question first.</div>';
@@ -61,13 +63,33 @@ class="border border-gray-200 rounded-lg p-4 text-gray-700 bg-gray-50 min-h-[100
       </div>
     `;
 
-    setTimeout(() => {
-      output.innerHTML = `
-        <div class="space-y-2 text-sm text-gray-700">
-          <p class="font-semibold text-gray-800">Answer received</p>
-          <p><strong>Question:</strong> ${question}</p>
-        </div>
-      `;
-    }, 1200);
+    const formData = new FormData();
+    formData.append('question', question);
+    if (file) {
+      formData.append('notes', file);
+    }
+
+    try {
+      const response = await fetch('http://localhost:8000/api/ask', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        output.innerHTML = `
+          <div class="space-y-2 text-sm text-gray-700">
+            <p class="font-semibold text-gray-800">Answer received</p>
+            <p><strong>Question:</strong> ${question}</p>
+            <p class="mt-2 text-gray-900">${result.answer}</p>
+          </div>
+        `;
+      } else {
+        output.innerHTML = '<div class="text-sm text-red-500">Failed to get an answer from the server.</div>';
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      output.innerHTML = '<div class="text-sm text-red-500">An error occurred while contacting the server.</div>';
+    }
   });
 </script>

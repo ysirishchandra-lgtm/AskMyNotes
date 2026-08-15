@@ -1,16 +1,16 @@
 services:
   - type: web
-    name: classifier-frontend
+    name: askmynotes-frontend
     env: docker
-    rootDir: deployment
+    rootDir: ASK-MY-NOTES-CLASSIFIER
     dockerContext: Frontend
     dockerfilePath: Frontend/Dockerfile
     plan: free
 
   - type: web
-    name: classifier-backend
+    name: askmynotes-backend
     env: docker
-    rootDir: deployment
+    rootDir: ASK-MY-NOTES-CLASSIFIER
     dockerContext: Backend
     dockerfilePath: Backend/Dockerfile
     plan: free

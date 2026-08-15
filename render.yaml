@@ -3,6 +3,6 @@ services:
     name: askmynotes-api-latest
     env: docker
     rootDir: deployment
-    dockerContext: Backend
+    dockerContext: .
     dockerfilePath: Backend/Dockerfile
     plan: free

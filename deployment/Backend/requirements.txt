@@ -1,6 +1,9 @@
 fastapi
 uvicorn
-scikit-learn
-pandas
-joblib
 python-multipart
+langchain
+langchain-community
+langchain-huggingface
+faiss-cpu
+PyPDF2
+huggingface-hub

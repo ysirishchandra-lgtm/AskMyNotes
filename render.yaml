@@ -1,16 +1,8 @@
 services:
   - type: web
-    name: askmynotes-frontend
+    name: askmynotes-api-latest
     env: docker
-    rootDir: ASK-MY-NOTES-CLASSIFIER
-    dockerContext: Frontend
-    dockerfilePath: Frontend/Dockerfile
-    plan: free
-
-  - type: web
-    name: askmynotes-backend
-    env: docker
-    rootDir: ASK-MY-NOTES-CLASSIFIER
+    rootDir: deployment
     dockerContext: Backend
     dockerfilePath: Backend/Dockerfile
     plan: free

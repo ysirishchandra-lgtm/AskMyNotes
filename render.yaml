@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: askmynotes-api-latest
+    name: askmynotes-final
     env: docker
     rootDir: deployment
     dockerContext: .

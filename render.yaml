@@ -1,8 +1,16 @@
 services:
   - type: web
-    name: askmynotes-api
+    name: classifier-frontend
     env: docker
     rootDir: deployment
+    dockerContext: Frontend
+    dockerfilePath: Frontend/Dockerfile
     plan: free
-    dockerContext: .
-    dockerfilePath: ./Dockerfile
+
+  - type: web
+    name: classifier-backend
+    env: docker
+    rootDir: deployment
+    dockerContext: Backend
+    dockerfilePath: Backend/Dockerfile
+    plan: free

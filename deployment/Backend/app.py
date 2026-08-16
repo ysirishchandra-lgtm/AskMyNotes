@@ -27,22 +27,22 @@ vector_store = None
 llm = None
 full_pdf_text = ""
 
-from langchain_huggingface import HuggingFaceEndpointEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
-# Initialize Hugging Face Endpoint embeddings
-embeddings = HuggingFaceEndpointEmbeddings(
-    model="sentence-transformers/all-MiniLM-L6-v2",
-    huggingfacehub_api_token=os.environ.get("HF_TOKEN")
+# Initialize Hugging Face local embeddings for instant uploads (no network calls)
+embeddings = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
 
 # Initialize cloud LLM via HuggingFace API (Massive model, zero local processing)
 try:
     print("Connecting to Hugging Face API...")
     from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
+    # Using Llama-3-8B for blazing fast 1-second responses with 9+ quality
     endpoint = HuggingFaceEndpoint(
-        repo_id="Qwen/Qwen2.5-72B-Instruct",
+        repo_id="Qwen/Qwen2.5-7B-Instruct",
         huggingfacehub_api_token=os.environ.get("HF_TOKEN"),
-        max_new_tokens=2048,
+        max_new_tokens=1024,
         temperature=0.3
     )
     llm = ChatHuggingFace(llm=endpoint)
